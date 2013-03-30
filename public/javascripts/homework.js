@@ -10,13 +10,12 @@ var Listener = {
 	},
 	getTaobaoData:function(){
 		$.ajax({
-			url: "/getTaobaoData/"+$("#data-info").val(),
+			url:encodeURI("/getTaobaoData/"+$("#data-info").val()),
 			dataType : "json",
 			type : "get",
 			cache : false,
 			success : function(data){
-				console.log("taobao===============");
-				console.log(data);
+				Listener.resolveTaobaoData(data.data);
 			},
 			error : function(){
 				alert("获取淘宝数据失败");
@@ -25,13 +24,12 @@ var Listener = {
 	},
 	getPaiPaiData:function(){
 		$.ajax({
-			url: "/getPaiPaiData/"+$("#data-info").val(),
+			url:"/getPaiPaiData/"+$("#data-info").val(),
 			dataType : "json",
 			type : "get",
 			cache : false,
 			success : function(data){
-				console.log("paipai===============");
-				console.log(data);
+				Listener.resolvePaiPaiData(data.data);
 			},
 			error : function(){
 				alert("获取拍拍数据失败");
@@ -45,12 +43,38 @@ var Listener = {
 			type : "get",
 			cache : false,
 			success : function(data){
-				console.log("buy===============");
-				console.log(data);
+				Listener.resolveBuyData(data.data);
 			},
 			error : function(){
 				alert("获取京东数据失败");
 			}
 		});
+	},
+	resolveTaobaoData: function(data){
+		for(var i=0,len=data.length;i<len;i++){
+			var node = $(".taobao-ul .hidden-item").clone(false);
+			$(node).find(".p-name").text("商品名称:"+data[i].name);
+			$(node).find(".p-price").text("价格:"+data[i].price);
+			$(node).find(".p-link a").attr("herf",data[i].link);
+			$(node).removeClass("hidden-item").appendTo(".taobao-ul");
+		}
+	},
+	resolvePaiPaiData: function(data){
+		for(var i=0,len=data.length;i<len;i++){
+			var node = $(".paipai-ul .hidden-item").clone(false);
+			$(node).find(".p-name").text("商品名称:"+data[i].name);
+			$(node).find(".p-price").text("价格:"+data[i].price);
+			$(node).find(".p-link a").attr("herf",data[i].link);
+			$(node).removeClass("hidden-item").appendTo(".paipai-ul");
+		}
+	},
+	resolveBuyData:function(data){
+		for(var i=0,len=data.length;i<len;i++){
+			var node = $(".buy-ul .hidden-item").clone(false);
+			$(node).find(".p-name").text("商品名称:"+data[i].name);
+			$(node).find(".p-price").text("价格:"+data[i].price);
+			$(node).find(".p-link a").attr("herf",data[i].link);
+			$(node).removeClass("hidden-item").appendTo(".buy-ul");
+		}
 	}
 }

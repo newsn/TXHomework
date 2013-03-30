@@ -4,24 +4,27 @@ var BufferHelper = require('bufferhelper');
 var $ = require('jquery');
 var TaobaoOption = {
 	host:'s.taobao.com',
-    path:'http://s.taobao.com/search?q=iphone5&app=detail'
+    path:''
 };
 var PaiPaiOption = {
 	host:'search1.paipai.com',
-    path:'http://search1.paipai.com/cgi-bin/comm_search1?KeyWord=iphone5'
+    path:''
 };
 var BuyOption = {
 	host:'search.jd.com',
-    path:'http://search.jd.com/Search?keyword=iphone5&enc=utf-8'
+    path:''
 };
-exports.getTaobaoData = function(res){
-	Tool.sendRequset(TaobaoOption,true,"taobao",res);//转后没乱码
+exports.getTaobaoData = function(res,info){
+	TaobaoOption.path = "http://s.taobao.com/search?q="+info+"&app=detail"
+	Tool.sendRequset(TaobaoOption,true,"taobao",res);
 }
-exports.getPaiPaiData = function(res){
-	Tool.sendRequset(PaiPaiOption,false,"paipai",res);//没乱码
+exports.getPaiPaiData = function(res,info){
+	PaiPaiOption.path = "http://search1.paipai.com/cgi-bin/comm_search1?KeyWord="+info;
+	Tool.sendRequset(PaiPaiOption,false,"paipai",res);
 }
-exports.getBuyData = function(res){
-	Tool.sendRequset(BuyOption,true,"buy",res);//转后没乱码
+exports.getBuyData = function(res,info){
+	BuyOption.path = "http://search.jd.com/Search?keyword="+info+"&enc=utf-8";
+	Tool.sendRequset(BuyOption,true,"buy",res);
 }
 
 

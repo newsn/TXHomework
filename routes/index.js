@@ -8,7 +8,8 @@ exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
 exports.getTaobaoData = function(req,res){
-	controller.getTaobaoData(res);
+	//console.log(req.params.info);
+	controller.getTaobaoData(res,req.params.info);
 };
 exports.getPaiPaiData = function(req,res){
 	controller.getPaiPaiData(res);
