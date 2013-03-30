@@ -7,8 +7,8 @@ var TaobaoOption = {
     path:'http://s.taobao.com/search?q=iphone5&app=detail'
 };
 var PaiPaiOption = {
-	host:'search.yihaodian.com',
-    path:'http://search.yihaodian.com/s2/c0-0/kiphone5'
+	host:'search1.paipai.com',
+    path:'http://search1.paipai.com/cgi-bin/comm_search1?KeyWord=iphone5'
 };
 var BuyOption = {
 	host:'search.jd.com',
@@ -89,10 +89,19 @@ var Tool = {
 	resolvePaiPaiData : function(string){
 		var data = [];
 		//var nodes = $(string).find("#itemList li");
+		
 	},
 	resolveBuyData : function(string){
 		var data = [];
-		
+		var nodes = $(string).find(".list-h li");
+		for(var i=0,len=$(nodes).length;i<len;i++){
+			var node = nodes[i];
+			var obj = {
+				name : $(node).find(".p-name a").text(),
+				link : $(node).find(".p-name a").attr("href"),
+				price_id : $(node).find(".p-price span").attr("id")
+			};
+		}
 	}
 };
 
