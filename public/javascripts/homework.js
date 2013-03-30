@@ -10,7 +10,7 @@ var Listener = {
 	},
 	getTaobaoData:function(){
 		$.ajax({
-			url:encodeURI("/getTaobaoData/"+$("#data-info").val()),
+			url:"/getTaobaoData/"+$("#data-info").val(),
 			dataType : "json",
 			type : "get",
 			cache : false,
@@ -72,7 +72,8 @@ var Listener = {
 		for(var i=0,len=data.length;i<len;i++){
 			var node = $(".buy-ul .hidden-item").clone(false);
 			$(node).find(".p-name").text("商品名称:"+data[i].name);
-			$(node).find(".p-price").text("价格:"+data[i].price);
+			/*$(node).find(".p-price").text("价格:"+data[i].price);*/
+			$(node).find(".price-img").attr("src",data[i].price);
 			$(node).find(".p-link a").attr("herf",data[i].link);
 			$(node).removeClass("hidden-item").appendTo(".buy-ul");
 		}

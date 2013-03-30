@@ -126,14 +126,16 @@ var Tool = {
 		return data;
 	},
 	resolveBuyData : function(string){
+		//console.log(string);
 		var data = [];
 		var nodes = $(string).find(".list-h li");
 		for(var i=0,len=$(nodes).length;i<len;i++){
 			var node = nodes[i];
+			//console.log($(node).find(".p-price img").attr("class"));
 			var obj = {
 				name : $(node).find(".p-name a").text(),
 				link : $(node).find(".p-name a").attr("href"),
-				price_id : $(node).find(".p-price span").attr("id")
+				price : $(node).find(".p-price img").attr("data-lazyload")
 			};
 			data.push(obj);
 		}
