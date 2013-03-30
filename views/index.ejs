@@ -13,33 +13,42 @@
 		<p class="header-ps">This page is to get some data from taobao,paipai,360buy and anaylsis the data!</p>
 	</header>
 	<div class="input-box">
-		<span class="input-aside">请输入你想查询的商品:</span>
-		<input type="text" id="data-info">
-		<button id="get-data-btn">查询</button>
+		<p class="input-aside">请输入你想查询的商品:</p>
+		<div class="input-row">
+			<input type="text" id="data-info">
+			<input type="submit" value="查询" id="get-data-btn">
+		</div>
 	</div>
 	<div class="store-box">
 		<div class="taobao-box">
+			<h2 class="store-box-title">淘宝的数据</h2>
 			<ul class="store-ul taobao-ul">
 				<li class="taobao-item hidden-item">
 					<p class="p-name">商品名称:xxxxxxxxxxx</p>
-					<p class="p-price">4000</p>
-					<p class="p-link"><a>查看</a></p>
+					<p class="p-price">价格:4000</p>
+					<p class="p-link"><a href="">查看链接</a></p>
 				</li>
 			</ul>
 		</div>
-		<div class="store-ul paipai-box">
-			<li class="taobao-item hidden-item">
-				<p class="p-name">商品名称:xxxxxxxxxxx</p>
-				<p class="p-price">4000</p>
-				<p class="p-link"><a>查看</a></p>
-			</li>
+		<div class="paipai-box">
+			<h2 class="store-box-title">拍拍的数据</h2>
+			<ul class="store-ul taobao-ul">
+				<li class="paipai-item hidden-item">
+					<p class="p-name">商品名称:xxxxxxxxxxx</p>
+					<p class="p-price">价格:4000</p>
+					<p class="p-link"><a href="">查看链接</a></p>
+				</li>
+			</ul>
 		</div>
-		<div class="store-ul buy-box">
-			<li class="taobao-item hidden-item">
-				<p class="p-name">商品名称:xxxxxxxxxxx</p>
-				<p class="p-price">4000</p>
-				<p class="p-link"><a>查看</a></p>
-			</li>
+		<div class="buy-box">
+			<h2 class="store-box-title">京东的数据</h2>
+			<ul class="store-ul taobao-ul">
+				<li class="buy-item hidden-item">
+					<p class="p-name">商品名称:xxxxxxxxxxx</p>
+					<p class="p-price">价格:4000</p>
+					<p class="p-link"><a href="">查看链接</a></p>
+				</li>
+			</ul>
 		</div>
 	</div>
 	<footer></footer>	

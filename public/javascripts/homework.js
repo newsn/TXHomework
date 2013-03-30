@@ -9,12 +9,48 @@ var Listener = {
 		Listener.getBuyData();
 	},
 	getTaobaoData:function(){
-		console.log("TaoBao");
+		$.ajax({
+			url: "/getTaobaoData/"+$("#data-info").val(),
+			dataType : "json",
+			type : "get",
+			cache : false,
+			success : function(data){
+				console.log("taobao===============");
+				console.log(data);
+			},
+			error : function(){
+				alert("获取淘宝数据失败");
+			}
+		});
 	},
 	getPaiPaiData:function(){
-		console.log("PaiPai");
+		$.ajax({
+			url: "/getPaiPaiData/"+$("#data-info").val(),
+			dataType : "json",
+			type : "get",
+			cache : false,
+			success : function(data){
+				console.log("paipai===============");
+				console.log(data);
+			},
+			error : function(){
+				alert("获取拍拍数据失败");
+			}
+		});
 	},
 	getBuyData:function(){
-		console.log("Buy");
+		$.ajax({
+			url: "/getBuyData/"+$("#data-info").val(),
+			dataType : "json",
+			type : "get",
+			cache : false,
+			success : function(data){
+				console.log("buy===============");
+				console.log(data);
+			},
+			error : function(){
+				alert("获取京东数据失败");
+			}
+		});
 	}
 }

@@ -14,20 +14,20 @@ var BuyOption = {
 	host:'search.jd.com',
     path:'http://search.jd.com/Search?keyword=iphone5&enc=utf-8'
 };
-exports.getTaobaoData = function(){
-	Tool.sendRequset(TaobaoOption,true,"taobao");//转后没乱码
+exports.getTaobaoData = function(res){
+	Tool.sendRequset(TaobaoOption,true,"taobao",res);//转后没乱码
 }
-exports.getPaiPaiData = function(){
-	Tool.sendRequset(PaiPaiOption,false,"paipai");//没乱码
+exports.getPaiPaiData = function(res){
+	Tool.sendRequset(PaiPaiOption,false,"paipai",res);//没乱码
 }
-exports.getBuyData = function(){
-	Tool.sendRequset(BuyOption,true,"buy");//转后没乱码
+exports.getBuyData = function(res){
+	Tool.sendRequset(BuyOption,true,"buy",res);//转后没乱码
 }
 
 
 /*优化*/
 var Tool = {
-	sendRequset : function (option,change,store){
+	sendRequset : function (option,change,store,dataRes){
 		if(change == true){
 			var bufferHelper = new BufferHelper();
 			var req=http.request(option,function(res){
@@ -35,13 +35,21 @@ var Tool = {
 			        bufferHelper.concat(chunk);
 			    });
 			    res.on('end',function(){ 
-				    //console.log(iconv.decode(bufferHelper.toBuffer(),'GBK'));
-				    if(store == "taobao")
-				     Tool.resolveTaobaoData(iconv.decode(bufferHelper.toBuffer(),'GBK'));
-					else if(store == "buy")
-					 Tool.resolveBuyData(iconv.decode(bufferHelper.toBuffer(),'GBK'));
-					else if(store == "paipai-recdirect")
-					 Tool.resolvePaiPaiData(iconv.decode(bufferHelper.toBuffer(),'GBK'));
+				    if(store == "taobao"){
+				    	dataRes.writeHead(200, {'content-type': 'text/json' });
+						dataRes.write( JSON.stringify({ data : Tool.resolveTaobaoData(iconv.decode(bufferHelper.toBuffer(),'GBK')) }) );
+						dataRes.end('\n');
+				    }
+					else if(store == "buy"){
+						dataRes.writeHead(200, {'content-type': 'text/json' });
+						dataRes.write( JSON.stringify({ data : Tool.resolveBuyData(iconv.decode(bufferHelper.toBuffer(),'GBK')) }) );
+						dataRes.end('\n');
+					}
+					else if(store == "paipai-recdirect"){
+						dataRes.writeHead(200, {'content-type': 'text/json' });
+						dataRes.write( JSON.stringify({ data : Tool.resolvePaiPaiData(iconv.decode(bufferHelper.toBuffer(),'GBK')) }) );
+						dataRes.end('\n');
+					}
 				});
 			});
 			req.on('error',function(e){
@@ -56,7 +64,7 @@ var Tool = {
 			        str+=chunk;
 			    });
 			    res.on('end',function(){
-				    Tool.redirectPaiPai(str);
+				    Tool.redirectPaiPai(str,dataRes);
 				});
 			});
 			req.on('error',function(e){
@@ -88,13 +96,13 @@ var Tool = {
 		}
 		return data;
 	},
-	redirectPaiPai : function(string){
+	redirectPaiPai : function(string,dataRes){
 		var redirect_src = $(string).find("a").attr("HREF");
 		var redirect_obj = {
 			host:'search1.paipai.com',
 			path:redirect_src
 		}
-		Tool.sendRequset(redirect_obj,true,"paipai-recdirect");
+		Tool.sendRequset(redirect_obj,true,"paipai-recdirect",dataRes);
 	},
 	resolvePaiPaiData:function(string){
 		var data = [];
@@ -112,6 +120,7 @@ var Tool = {
 			};
 			data.push(obj);
 		}
+		return data;
 	},
 	resolveBuyData : function(string){
 		var data = [];
@@ -123,7 +132,9 @@ var Tool = {
 				link : $(node).find(".p-name a").attr("href"),
 				price_id : $(node).find(".p-price span").attr("id")
 			};
+			data.push(obj);
 		}
+		return data;
 	}
 };
 

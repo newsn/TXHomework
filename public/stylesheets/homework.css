@@ -5,19 +5,73 @@
 }
 .header{
 	width: 1200px;
+	margin:23px auto 7px auto;
+}
+.header-title{
+	font-size: 28px;
+	width: 650px;
+	margin: auto;
+	color: #48508f;
+}
+.header-ps{
+	width: 650px;
 	margin: auto;
 }
 .input-box{
+	width: 520px;
 	margin: 30px auto;
 }
+.input-aside{
+	margin-bottom: 6px;
+}
+.input-row{
+	height: 35px;
+	width: 100%;
+}
+#data-info{
+	display: inline-block;
+	float: left;
+	width: 410px;
+	height: 28px;
+	padding: 1px;
+	font-size: 20px;
+}
+#get-data-btn{
+	display: inline-block;
+	float: left;
+	width: 70px;
+	height: 36px;
+	margin-left: 10px;
+}
+.store-box{
+	width: 1206px;
+	margin: 15px auto;
+}
+.taobao-box,.paipai-box,.buy-box{
+	float: left;
+	width: 400px;
+	border: 1px solid #8c8888;
+}
+.paipai-box{
+	border-left: none;
+	border-right: none;
+}
+.store-box-title{
+	text-align: center;
+	padding: 5px 0;
+	background-color: #eff0f3;
+	color: #202261;
+}
+
 .store-ul{
 	width: 400px;
 	float: left;
 }
 .store-ul li{
-	padding: 15px;
+	padding: 10px 10px;
+	border-top: 1px solid #8c8888;
 	list-style: none;
 }
 .hidden-item{
-	display: none;
+	/*display: none;*/
 }
