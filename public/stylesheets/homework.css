@@ -1,0 +1,23 @@
+*{
+	padding: 0;
+	margin: 0;
+	outline: 0;
+}
+.header{
+	width: 1200px;
+	margin: auto;
+}
+.input-box{
+	margin: 30px auto;
+}
+.store-ul{
+	width: 400px;
+	float: left;
+}
+.store-ul li{
+	padding: 15px;
+	list-style: none;
+}
+.hidden-item{
+	display: none;
+}

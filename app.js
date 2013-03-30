@@ -27,6 +27,9 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/getTaobaoData/:info',routes.getTaobaoData);
+app.get('/getPaiPaiData/:info',routes.getPaiPaiData);
+app.get('/getBuyData/:info',routes.getBuyData);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

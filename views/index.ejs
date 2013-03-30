@@ -1,11 +1,47 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/homework.css">
+	<script type="text/javascript" src="/javascripts/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="/javascripts/homework.js"></script>
+</head>
+<body>
+	<header class="header">
+		<h1 class="header-title">WelCome to Noonnightstorm Homework</h1>
+		<p class="header-ps">This page is to get some data from taobao,paipai,360buy and anaylsis the data!</p>
+	</header>
+	<div class="input-box">
+		<span class="input-aside">请输入你想查询的商品:</span>
+		<input type="text" id="data-info">
+		<button id="get-data-btn">查询</button>
+	</div>
+	<div class="store-box">
+		<div class="taobao-box">
+			<ul class="store-ul taobao-ul">
+				<li class="taobao-item hidden-item">
+					<p class="p-name">商品名称:xxxxxxxxxxx</p>
+					<p class="p-price">4000</p>
+					<p class="p-link"><a>查看</a></p>
+				</li>
+			</ul>
+		</div>
+		<div class="store-ul paipai-box">
+			<li class="taobao-item hidden-item">
+				<p class="p-name">商品名称:xxxxxxxxxxx</p>
+				<p class="p-price">4000</p>
+				<p class="p-link"><a>查看</a></p>
+			</li>
+		</div>
+		<div class="store-ul buy-box">
+			<li class="taobao-item hidden-item">
+				<p class="p-name">商品名称:xxxxxxxxxxx</p>
+				<p class="p-price">4000</p>
+				<p class="p-link"><a>查看</a></p>
+			</li>
+		</div>
+	</div>
+	<footer></footer>	
+</body>
+</html> 

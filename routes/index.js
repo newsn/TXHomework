@@ -5,6 +5,14 @@
  var controller = require('../controller/GetData');
 
 exports.index = function(req, res){
-  controller.getPaiPaiData();
   res.render('index', { title: 'Express' });
+};
+exports.getTaobaoData = function(req,res){
+
+};
+exports.getPaiPaiData = function(req,res){
+
+};
+exports.getBuyData = function(req,res){
+	
 };
