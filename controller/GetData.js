@@ -40,6 +40,8 @@ var Tool = {
 				     Tool.resolveTaobaoData(iconv.decode(bufferHelper.toBuffer(),'GBK'));
 					else if(store == "buy")
 					 Tool.resolveBuyData(iconv.decode(bufferHelper.toBuffer(),'GBK'));
+					else if(store == "paipai-recdirect")
+					 Tool.resolvePaiPaiData(iconv.decode(bufferHelper.toBuffer(),'GBK'));
 				});
 			});
 			req.on('error',function(e){
@@ -53,8 +55,8 @@ var Tool = {
 			    res.on('data',function(chunk){
 			        str+=chunk;
 			    });
-			    res.on('end',function(){ 
-				    console.log(str);
+			    res.on('end',function(){
+				    Tool.redirectPaiPai(str);
 				});
 			});
 			req.on('error',function(e){
@@ -86,10 +88,30 @@ var Tool = {
 		}
 		return data;
 	},
-	resolvePaiPaiData : function(string){
+	redirectPaiPai : function(string){
+		var redirect_src = $(string).find("a").attr("HREF");
+		var redirect_obj = {
+			host:'search1.paipai.com',
+			path:redirect_src
+		}
+		Tool.sendRequset(redirect_obj,true,"paipai-recdirect");
+	},
+	resolvePaiPaiData:function(string){
 		var data = [];
-		//var nodes = $(string).find("#itemList li");
-		
+		var nodes = $(string).find("#itemList li");
+		for(var i=0,len=$(nodes).length;i<len;i++){
+			var node = nodes[i];
+			var obj = {
+				name : $(node).find(".item-show h3").text(),
+				link : (function (){
+					var as = $(node).find(".item-show h3 a");
+					var a = as[$(node).find(".item-show h3 a").length-1];
+					return $(a).attr("href");
+				})(),
+				price : $(node).find(".price p em").text()
+			};
+			data.push(obj);
+		}
 	},
 	resolveBuyData : function(string){
 		var data = [];
@@ -105,61 +127,3 @@ var Tool = {
 	}
 };
 
-
-
-/*历史记录*/
-/*function sendReqToTaobao(){
-	var bufferHelper = new BufferHelper();
-	var req=http.request(TaobaoOption,function(res){
-	    res.on('data',function(chunk){
-	        bufferHelper.concat(chunk);
-	    });
-	    res.on('end',function(){ 
-		    console.log(iconv.decode(bufferHelper.toBuffer(),'GBK'));
-		});
-	});
-	req.on('error',function(e){
-	    console.log('Error got: '+e.message);
-	});
-	req.end();
-}
-function sendReqToPaiPai(){
-	var req=http.request(PaiPaiOption,function(res){
-		var str = "";
-	    res.on('data',function(chunk){
-	        str+=chunk;
-	    });
-	    res.on('end',function(){ 
-		    console.log(str);
-		});
-	});
-	req.on('error',function(e){
-	    console.log('Error got: '+e.message);
-	});
-	req.end();
-}
-function sendReqToBuy(){
-	var bufferHelper = new BufferHelper();
-	var req=http.request(BuyOption,function(res){
-	    res.on('data',function(chunk){
-	        bufferHelper.concat(chunk);
-	    });
-	    res.on('end',function(){ 
-		    console.log(iconv.decode(bufferHelper.toBuffer(),'GBK'));
-		});
-	});
-	req.on('error',function(e){
-	    console.log('Error got: '+e.message);
-	});
-	req.end();
-}*/
-
-/*function resolveTaobaoData(){
-
-}
-function resolvePaiPaiData(){
-
-}
-function resolveBuyData(){
-
-}*/
