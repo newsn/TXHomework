@@ -1,6 +1,9 @@
 var http = require('http');
 var iconv = require('iconv-lite'); 
 var BufferHelper = require('bufferhelper');
+var nodecr = require('nodecr');
+var request = require('request');
+var fs = require('fs');
 var $ = require('jquery');
 var TaobaoOption = {
 	host:'s.taobao.com',
@@ -30,6 +33,7 @@ exports.getBuyData = function(res,info){
 
 /*优化*/
 var Tool = {
+	imagecount : 0,
 	sendRequset : function (option,change,store,dataRes){
 		if(change == true){
 			var bufferHelper = new BufferHelper();
@@ -44,9 +48,11 @@ var Tool = {
 						dataRes.end('\n');
 				    }
 					else if(store == "buy"){
-						dataRes.writeHead(200, {'content-type': 'text/json' });
-						dataRes.write( JSON.stringify({ data : Tool.resolveBuyData(iconv.decode(bufferHelper.toBuffer(),'GBK')) }) );
-						dataRes.end('\n');
+						Tool.resolveBuyData(iconv.decode(bufferHelper.toBuffer(),'GBK'),function(data){
+							dataRes.writeHead(200, {'content-type': 'text/json' });
+							dataRes.write( JSON.stringify({ data : data}) );
+							dataRes.end('\n');
+						});
 					}
 					else if(store == "paipai-recdirect"){
 						dataRes.writeHead(200, {'content-type': 'text/json' });
@@ -125,21 +131,44 @@ var Tool = {
 		}
 		return data;
 	},
-	resolveBuyData : function(string){
-		//console.log(string);
+	resolveBuyData : function(string,callback){
 		var data = [];
 		var nodes = $(string).find(".list-h li");
 		for(var i=0,len=$(nodes).length;i<len;i++){
-			var node = nodes[i];
-			//console.log($(node).find(".p-price img").attr("class"));
-			var obj = {
-				name : $(node).find(".p-name a").text(),
-				link : $(node).find(".p-name a").attr("href"),
-				price : $(node).find(".p-price img").attr("data-lazyload")
-			};
-			data.push(obj);
+			(function(){
+				var node = nodes[i];
+				analysisImage($(node).find(".p-price img").attr("data-lazyload"), function(price){
+					var obj = {
+						name : $(node).find(".p-name a").text(),
+						link : $(node).find(".p-name a").attr("href"),
+						price : price
+					};
+					data.push(obj);
+					if(data.length == len - 1){
+						callback(data);
+					}
+				});
+			})();	
 		}
-		return data;
 	}
 };
+
+function analysisImage (src,callback){
+	var imageOption = {
+		host:'jprice.360buyimg.com',
+    	path:src
+	};
+	var sys = require('sys')
+	var exec = require('child_process').exec;
+	var count = Tool.imagecount;
+	Tool.imagecount++;
+	request(src).pipe(fs.createWriteStream(__dirname+"/"+count+'.png')).on("close",function(){
+		exec("gocr -i public/images/"+count+".png  -C 0-9.", function (error, stdout, stderr) {
+			callback("¥"+stdout.substr(1));
+			if (error !== null) {
+				console.log('exec error: ' + error);
+			}
+		});
+	});
+}
 

@@ -1,0 +1,58 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'child_process' ]
+2 info using npm@1.1.65
+3 info using node@v0.8.14
+4 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/package.json
+5 warn package.json application-name@0.0.1 No README.md file found!
+6 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/express/package.json
+7 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/ejs/package.json
+8 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/request/package.json
+9 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/node-tesseract/package.json
+10 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/nodecr/package.json
+11 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/sys/package.json
+12 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/jquery/package.json
+13 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/iconv-lite/package.json
+14 verbose read json /home/noonnightstorm/coding/nodeJs/TXHomework/node_modules/bufferhelper/package.json
+15 verbose from cache /home/noonnightstorm/coding/nodeJs/TXHomework/package.json
+16 verbose readDependencies using package.json deps
+17 verbose cache add [ 'child_process', null ]
+18 silly cache add name=undefined spec="child_process" args=["child_process",null]
+19 verbose parsed url { pathname: 'child_process',
+19 verbose parsed url   path: 'child_process',
+19 verbose parsed url   href: 'child_process' }
+20 silly lockFile 4845fa97-child-process child_process
+21 verbose lock child_process /home/noonnightstorm/.npm/4845fa97-child-process.lock
+22 silly lockFile 4845fa97-child-process child_process
+23 verbose addNamed [ 'child_process', '' ]
+24 verbose addNamed [ null, '' ]
+25 silly lockFile 512a7ef6-child-process child_process@
+26 verbose lock child_process@ /home/noonnightstorm/.npm/512a7ef6-child-process.lock
+27 silly addNameRange { name: 'child_process', range: '', hasData: false }
+28 verbose url raw child_process
+29 verbose url resolving [ 'https://registry.npmjs.org/', './child_process' ]
+30 verbose url resolved https://registry.npmjs.org/child_process
+31 info trying registry request attempt 1 at 14:39:49
+32 http GET https://registry.npmjs.org/child_process
+33 http 404 https://registry.npmjs.org/child_process
+34 silly registry.get cb [ 404,
+34 silly registry.get   { server: 'CouchDB/1.2.1 (Erlang OTP/R15B03)',
+34 silly registry.get     date: 'Sun, 31 Mar 2013 06:39:56 GMT',
+34 silly registry.get     'content-type': 'application/json',
+34 silly registry.get     'content-length': '52',
+34 silly registry.get     'cache-control': 'must-revalidate' } ]
+35 silly lockFile 512a7ef6-child-process child_process@
+36 error 404 'child_process' is not in the npm registry.
+36 error 404 You should bug the author to publish it
+36 error 404
+36 error 404 Note that you can also install from a
+36 error 404 tarball, folder, or http url, or git url.
+37 error System Linux 3.0.0-16-generic
+38 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "child_process"
+39 error cwd /home/noonnightstorm/coding/nodeJs/TXHomework
+40 error node -v v0.8.14
+41 error npm -v 1.1.65
+42 error code E404
+43 verbose exit [ 1, true ]
