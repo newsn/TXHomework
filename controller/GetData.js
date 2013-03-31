@@ -162,8 +162,9 @@ function analysisImage (src,callback){
 	var exec = require('child_process').exec;
 	var count = Tool.imagecount;
 	Tool.imagecount++;
-	request(src).pipe(fs.createWriteStream(__dirname+"/"+count+'.png')).on("close",function(){
+	request(src).pipe(fs.createWriteStream("public/images"+"/"+count+'.png')).on("close",function(){
 		exec("gocr -i public/images/"+count+".png  -C 0-9.", function (error, stdout, stderr) {
+			console.log(stdout);
 			callback("¥"+stdout.substr(1));
 			if (error !== null) {
 				console.log('exec error: ' + error);
